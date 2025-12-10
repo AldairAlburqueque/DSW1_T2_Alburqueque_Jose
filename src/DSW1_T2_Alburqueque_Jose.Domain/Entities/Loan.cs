@@ -10,7 +10,6 @@ namespace DSW1_T2_Alburqueque_Jose.Domain.Entities
     public string Status { get; set; } = string.Empty;
     public DateTime CreatedAt { get; set; } = DateTime.Now;
 
-    // Navegación opcional (si usarás EF)
     public Book? Book { get; set; }
   }
 }

@@ -42,5 +42,41 @@ namespace DSW1_T2_Alburqueque_Jose.Application.Services
       var book = await _unit.Books.GetByIdAsync(id);
       return _mapper.Map<BookDto>(book);
     }
+
+    //UPDATE
+    public async Task<BookDto?> UpdateAsync(int id, CreateBookDto dto)
+    {
+      var book = await _unit.Books.GetByIdAsync(id);
+      if (book == null)
+        return null;
+
+      // Validar ISBN único
+      var existing = await _unit.Books.GetByISBNAsync(dto.ISBN);
+      if (existing != null && existing.Id != id)
+        throw new Exception("Otro libro ya tiene este ISBN");
+
+      // Mapear cambios sobre la entidad existente
+      _mapper.Map(dto, book);
+
+      await _unit.Books.UpdateAsync(book);
+
+      // Persistir
+      await _unit.SaveChangesAsync();
+
+      return _mapper.Map<BookDto>(book);
+    }
+
+
+    // DELETE
+
+    public async Task<bool> DeleteAsync(int id)
+    {
+      var deleted = await _unit.Books.DeleteAsync(id);
+      if (!deleted)
+        return false;
+
+      await _unit.SaveChangesAsync();
+      return true;
+    }
   }
 }

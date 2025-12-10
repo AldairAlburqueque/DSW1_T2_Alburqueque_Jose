@@ -19,7 +19,7 @@ namespace DSW1_T2_Alburqueque_Jose.Infrastructure.Persistence.Context
 
       modelBuilder.Entity<Book>()
           .HasIndex(b => b.ISBN)
-          .IsUnique(); // asegura ISBN único
+          .IsUnique();
 
       modelBuilder.Entity<Loan>()
           .Property(l => l.Status)

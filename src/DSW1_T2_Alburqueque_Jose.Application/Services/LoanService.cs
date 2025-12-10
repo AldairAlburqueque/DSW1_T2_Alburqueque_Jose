@@ -17,9 +17,8 @@ namespace DSW1_T2_Alburqueque_Jose.Application.Services
       _mapper = mapper;
     }
 
-    // ===========================
+
     // CREATE LOAN
-    // ===========================
     public async Task<LoanDto> CreateLoanAsync(CreateLoanDto dto)
     {
       var book = await _unit.Books.GetByIdAsync(dto.BookId)
@@ -32,7 +31,7 @@ namespace DSW1_T2_Alburqueque_Jose.Application.Services
       book.Stock--;
       await _unit.Books.UpdateAsync(book);
 
-      // Crear préstamo (AutoMapper llena LoanDate y Status)
+      // Crear préstamo
       var loan = _mapper.Map<Loan>(dto);
 
       await _unit.Loans.CreateAsync(loan);
@@ -41,9 +40,8 @@ namespace DSW1_T2_Alburqueque_Jose.Application.Services
       return _mapper.Map<LoanDto>(loan);
     }
 
-    // ===========================
+
     // RETURN LOAN
-    // ===========================
     public async Task<LoanDto> ReturnLoanAsync(int loanId)
     {
       var loan = await _unit.Loans.GetByIdAsync(loanId)
@@ -68,18 +66,15 @@ namespace DSW1_T2_Alburqueque_Jose.Application.Services
       return _mapper.Map<LoanDto>(loan);
     }
 
-    // ===========================
     // GET ALL
-    // ===========================
     public async Task<IEnumerable<LoanDto>> GetAllAsync()
     {
       var loans = await _unit.Loans.GetAllAsync();
       return _mapper.Map<IEnumerable<LoanDto>>(loans);
     }
 
-    // ===========================
+
     // GET BY ID
-    // ===========================
     public async Task<LoanDto?> GetByIdAsync(int id)
     {
       var loan = await _unit.Loans.GetByIdAsync(id);

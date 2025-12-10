@@ -10,7 +10,7 @@ namespace DSW1_T2_Alburqueque_Jose.Application.Mapping
     {
       // BOOKS
       CreateMap<CreateBookDto, Book>()
-          .ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(_ => DateTime.Now)); // opcional: asigna CreatedAt al crear
+          .ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(_ => DateTime.Now));
       CreateMap<Book, BookDto>();
 
       // LOANS
