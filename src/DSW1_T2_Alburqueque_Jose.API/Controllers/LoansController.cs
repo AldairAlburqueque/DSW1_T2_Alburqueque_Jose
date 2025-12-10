@@ -15,7 +15,7 @@ namespace DSW1_T2_Alburqueque_Jose.API.Controllers
       _loanService = loanService;
     }
 
-    // GET api/loans
+
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
@@ -23,7 +23,7 @@ namespace DSW1_T2_Alburqueque_Jose.API.Controllers
       return Ok(loans);
     }
 
-    // GET api/loans/5
+
     [HttpGet("{id:int}")]
     public async Task<IActionResult> GetById(int id)
     {
@@ -33,7 +33,6 @@ namespace DSW1_T2_Alburqueque_Jose.API.Controllers
       return Ok(loan);
     }
 
-    // POST api/loans
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateLoanDto dto)
     {
@@ -48,7 +47,6 @@ namespace DSW1_T2_Alburqueque_Jose.API.Controllers
       }
     }
 
-    // POST api/loans/5/return
     [HttpPost("{id:int}/return")]
     public async Task<IActionResult> Return(int id)
     {
